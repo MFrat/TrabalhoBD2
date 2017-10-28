@@ -24,7 +24,7 @@ Modelagem, simplificada, das relações das entidades e regras de negócios do C
 ## Regras de negócio
 
 ### Partida
-1. Um time só pode ter uma partida por rodada de um campeonato.
+- Um time só pode ter uma partida por rodada de um campeonato.
 ``` plpgsql
 create or REPLACE function verifica_jogo_rodada() returns trigger
 LANGUAGE plpgsql
@@ -42,8 +42,7 @@ BEGIN
 END;
 $$;
 ```
-
-2. Só podem haver 10 partidas por rodada.
+- Só podem haver 10 partidas por rodada.
 ```plpgsql
 create or replace function verifica_qtd_partida_rodada() returns trigger
 LANGUAGE plpgsql
