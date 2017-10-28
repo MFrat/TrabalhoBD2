@@ -19,6 +19,10 @@ Modelagem, simplificada, das relações das entidades e regras de negócios do C
 
 ### Diagrama de relacionamento
 
+<p align="center">
+  <img src="https://i.imgur.com/7qef8yQ.png" width="900"/>
+</p>
+
 ### Modelo lógico
 
 ## Regras de negócio
@@ -62,3 +66,7 @@ BEGIN
 END;
 $$;
 ```
+
+### JogadorTimeUsuario
+- O número de jogadores em cada posição não pode exceder ao número imposto pela formação do time escolhida pelo usuário.
+
