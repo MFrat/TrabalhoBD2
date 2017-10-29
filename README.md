@@ -12,12 +12,14 @@
     5. [Campeonato](#campeonato)
     6. [Formação](#formacao)
 4. [Regras de negócio](#regras-de-negócio)
-    1. [Da Tabela Partida](#partida)
-    2. [Da Tabela Rodada](#rodada)
-    3. [Da Tabela TimeUsuario](#timeusuario)
-    4. [Da Tabela Jogador](#jogador)
-    5. [Da Tabela Campeonato](#campeonato)
-    6. [Da Tabela Formação](#formacao)
+    1. [Da Tabela Partida](#da-tabela-partida)
+    2. [Da Tabela Rodada](#da-tabela-rodada)
+    3. [Da Tabela TimeUsuario](#da-tabela-timeusuario)
+    4. [Da Tabela Jogador](#da-tabela-jogador)
+    5. [Da Tabela Campeonato](#da-tabela-campeonato)
+    6. [Da Tabela Formação](#da-tabela-formacao)
+5. [Outras consultas](outras-consultas)
+    1.[Classificação de um campeonato](classificação-de-um-campeonato)
 
 ## Visão Geral
 Modelagem, simplificada, das relações das entidades e regras de negócios do CartolaFC.
@@ -149,5 +151,74 @@ BEGIN
 
 END;
 $$;
+```
+
+## Outras consultas
+
+### Classificação do campeonato
+``` plpgsql
+CREATE OR REPLACE FUNCTION get_classificacao(idCamp INTEGER) RETURNS
+TABLE(equipe VARCHAR,
+  nJogos INTEGER,
+  vitorias INTEGER,
+  empates INTEGER,
+  derrotas INTEGER,
+  pontos INTEGER) AS
+$$
+DECLARE
+  cTimes CURSOR FOR
+    SELECT DISTINCT equipe.*
+    FROM "cartolaFC".partida
+    JOIN "cartolaFC".time as equipe ON idtime1 = equipe."idTime" OR idtime2 = equipe."idTime"
+    NATURAL JOIN "cartolaFC".rodada
+    WHERE "cartolaFC".rodada.idcampeonato = idCamp;
+
+  cPartidas CURSOR (idTime INTEGER) FOR SELECT "cartolaFC".partida.*
+                     FROM "cartolaFC".partida
+                     NATURAL JOIN "cartolaFC".rodada
+                     WHERE (idtime1 = idTime OR idtime2 = idTime) AND idcampeonato = idCamp;
+
+  nVitorias INTEGER := 0;
+  nEmpates INTEGER := 0;
+  nDerrotas INTEGER := 0;
+  pontos INTEGER := 0;
+BEGIN
+
+  FOR iTime IN cTimes LOOP
+
+    nVitorias := 0;
+    nEmpates := 0;
+    nDerrotas := 0;
+    FOR iPartida IN cPartidas(iTime."idTime") LOOP
+      IF iPartida.idTime1 = iTime."idTime" THEN
+        IF iPartida."golstime1" > iPartida."golstime2" THEN
+          nVitorias := nVitorias + 1;
+        ELSIF iPartida."golstime1" < iPartida."golstime2" THEN
+          nDerrotas := nDerrotas + 1;
+        ELSE
+          nEmpates := nEmpates + 1;
+        END IF;
+
+      ELSE
+        IF iPartida."golstime1" > iPartida."golstime2" THEN
+          nDerrotas := nDerrotas + 1;
+        ELSIF iPartida."golstime1" < iPartida."golstime2" THEN
+          nVitorias := nVitorias + 1;
+        ELSE
+          nEmpates := nEmpates + 1;
+        END IF;
+
+      END IF;
+
+    END LOOP;
+
+    pontos := nVitorias*3 + nEmpates;
+
+    RETURN QUERY SELECT iTime.nome, nVitorias + nEmpates + nDerrotas, nVitorias, nEmpates, nDerrotas, pontos;
+  END LOOP;
+
+END;
+$$
+LANGUAGE 'plpgsql';
 ```
 
