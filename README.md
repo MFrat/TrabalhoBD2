@@ -38,6 +38,10 @@ Modelagem, simplificada, das relações das entidades e regras de negócios do C
 ### Partida
 Tabela que armazena as informações de uma partida.
 
+<p align="start">
+  <img src="https://i.imgur.com/J7sbxWe.png" width="400"/>
+</p>
+
 
 ## Regras de negócio
 ### Partida
