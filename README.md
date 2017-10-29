@@ -32,8 +32,12 @@ Modelagem, simplificada, das relações das entidades e regras de negócios do C
 
 ### Modelo lógico
 
-## Regras de negócio
+## Tabelas
+### Partida
+Tabela que armazena as informações de uma partida.
 
+
+## Regras de negócio
 ### Partida
 - Um time só pode ter uma partida por rodada de um campeonato.
 ``` plpgsql
