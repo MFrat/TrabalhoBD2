@@ -12,12 +12,12 @@
     5. [Campeonato](#campeonato)
     6. [Formação](#formacao)
 4. [Regras de negócio](#regras-de-negócio)
-    1. [Partida](#partida)
-    2. [Rodada](#rodada)
-    3. [TimeUsuario](#timeusuario)
-    4. [Jogador](#jogador)
-    5. [Campeonato](#campeonato)
-    6. [Formação](#formacao)
+    1. [Da Tabela Partida](#partida)
+    2. [Da Tabela Rodada](#rodada)
+    3. [Da Tabela TimeUsuario](#timeusuario)
+    4. [Da Tabela Jogador](#jogador)
+    5. [Da Tabela Campeonato](#campeonato)
+    6. [Da Tabela Formação](#formacao)
 
 ## Visão Geral
 Modelagem, simplificada, das relações das entidades e regras de negócios do CartolaFC.
