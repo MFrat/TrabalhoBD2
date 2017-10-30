@@ -38,9 +38,18 @@ Modelagem, simplificada, das relações das entidades e regras de negócios do C
 ### Partida
 Tabela que armazena as informações de uma partida.
 
-<p align="start">
-  <img src="https://i.imgur.com/J7sbxWe.png" width="400"/>
-</p>
+#### Atributos
+`idPartida` Chave primária, autoincrement.
+
+`idTime1` Time da casa.
+
+`idTime2` Time visitante.
+
+`golstime1` Gols do time da casa.
+
+`golstime2` Gols do time visitante.
+
+`idRodada` Chave estrangeira que indica à qual rodada essa partida pertence.
 
 
 ## Regras de negócio
