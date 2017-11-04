@@ -19,6 +19,7 @@
     5. [Da Tabela Campeonato](#da-tabela-campeonato)
     6. [Da Tabela Formação](#da-tabela-formacao)
     7. [Da Tabela Pontuação do Jogador](#da-tabela-pontuação-do-jogador)
+    8. [Da Tabela Estatísticas do Jogador](#da-tabela-estatísticas-do-jogador)
 5. [Outras consultas](outras-consultas)
     1.[Classificação de um campeonato](classificação-de-um-campeonato)
 
@@ -198,6 +199,9 @@ BEGIN
 END;
 $$;
 ```
+
+### Da Tabela Estatísticas do jogador
+- Sempre que houver uma inserção ou atualização em alguma tupla, verificar se o somátorio do número de gols de todos os jogadores de um dado time excedeu o némero de gols que esse time fez na partida.
 
 ## Outras consultas
 
