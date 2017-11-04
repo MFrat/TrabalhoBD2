@@ -18,6 +18,7 @@
     4. [Da Tabela Jogador](#da-tabela-jogador)
     5. [Da Tabela Campeonato](#da-tabela-campeonato)
     6. [Da Tabela Formação](#da-tabela-formacao)
+    7. [Da Tabela Pontuação do Jogador](#da-tabela-pontuação-do-jogador)
 5. [Outras consultas](outras-consultas)
     1.[Classificação de um campeonato](classificação-de-um-campeonato)
 
@@ -53,7 +54,7 @@ Tabela que armazena as informações de uma partida.
 
 
 ## Regras de negócio
-### Partida
+### Da Tabela Partida
 - Um time só pode ter uma partida por rodada de um campeonato.
 ``` plpgsql
 create or REPLACE function verifica_jogo_rodada() returns trigger
@@ -93,7 +94,7 @@ END;
 $$;
 ```
 
-### JogadorTimeUsuario
+### Da Tabela JogadorTimeUsuario
 - O número de jogadores em cada posição não pode exceder ao número imposto pela formação do time escolhida pelo usuário.
 
 ```plpgsql
@@ -162,6 +163,38 @@ BEGIN
 
   RETURN NEW;
 
+END;
+$$;
+```
+
+### Da Tabela Pontuação do jogador
+- A cada inserção de tupla na tabela de Estatísticas do Jogador a respectiva pontuação deve ser calculada.
+``` plpgsql
+CREATE OR REPLACE FUNCTION pontuacao_jogador() RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  pontos INTEGER := 0;
+BEGIN
+  pontos := pontos - NEW.cartaoamarelo * 2;
+  pontos := pontos - NEW.cartaovermelho * 4;
+  pontos := pontos + NEW.chutesgol;
+  pontos := pontos + NEW.numerogols * 6;
+  pontos := pontos - NEW.faltascometidas;
+  pontos := pontos + NEW.roubadasbola;
+  pontos := pontos + NEW.defesapenalti * 6;
+  pontos := pontos + NEW.defesas * 2;
+
+  IF(TG_OP = 'INSERT') THEN
+    INSERT INTO "cartolaFC".pontuacao_jogador(pontuacao, idrodada, idjogador) VALUES (pontos, NEW.idrodada, NEW.idjogador);
+  END IF;
+
+  IF(TG_OP = 'UPDATE') THEN
+    UPDATE "cartolaFC".pontuacao_jogador SET pontuacao = pontos, idrodada = NEW.idrodada, idjogador = NEW.idjogador
+    WHERE idrodada = OLD.idrodada AND idjogador = OLD.idjogador;
+  END IF;
+
+  RETURN NEW;
 END;
 $$;
 ```
