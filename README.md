@@ -42,6 +42,14 @@ Modelagem, simplificada, das relações das entidades e regras de negócios do C
 ### Da Tabela Partida
 - Um time só pode ter uma partida por rodada de um campeonato.
 ``` plpgsql
+CREATE TRIGGER verifica_partida
+BEFORE INSERT OR UPDATE
+  ON partida
+FOR EACH ROW
+EXECUTE PROCEDURE verifica_jogo_rodada();
+```
+
+``` plpgsql
 create or REPLACE function verifica_jogo_rodada() returns trigger
 LANGUAGE plpgsql
 AS $$
@@ -59,6 +67,13 @@ END;
 $$;
 ```
 - Só podem haver 10 partidas por rodada.
+``` plpgsql
+CREATE TRIGGER verifica_qtd_partidas
+BEFORE INSERT
+  ON partida
+FOR EACH ROW
+EXECUTE PROCEDURE verifica_qtd_partida_rodada();
+```
 ```plpgsql
 create or replace function verifica_qtd_partida_rodada() returns trigger
 LANGUAGE plpgsql
