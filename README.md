@@ -31,7 +31,7 @@ Modelagem, simplificada, das relações das entidades e regras de negócios do C
 ### Diagrama de relacionamento
 
 <p align="center">
-  <img src="https://i.imgur.com/BCbwCQd.jpg" width="900"/>
+  <img src="https://i.imgur.com/LG9sfA9.jpg" width="900"/>
 </p>
 
 ### Modelo lógico
