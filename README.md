@@ -97,6 +97,13 @@ $$;
 ### Da Tabela JogadorTimeUsuario
 - O número de jogadores em cada posição não pode exceder ao número imposto pela formação do time escolhida pelo usuário.
 
+``` plpgsql
+CREATE TRIGGER trigger_verificia_time_usuario_formacao
+BEFORE INSERT
+  ON jogador_time_usuario
+FOR EACH ROW
+EXECUTE PROCEDURE time_usuario_valido_qtd_jogadores();
+```
 ```plpgsql
 create or replace function time_usuario_valido_qtd_jogadores() returns trigger
 LANGUAGE plpgsql
@@ -168,7 +175,18 @@ $$;
 ```
 
 ### Da Tabela Pontuação do jogador
+
+
+### Da Tabela Estatísticas do jogador
 - A cada inserção de tupla na tabela de Estatísticas do Jogador a respectiva pontuação deve ser calculada.
+``` plpgsql
+CREATE TRIGGER trigger_pontuacao_jogador
+BEFORE INSERT OR UPDATE
+  ON estatisticas_jogador
+FOR EACH ROW
+EXECUTE PROCEDURE pontuacao_jogador();
+```
+
 ``` plpgsql
 CREATE OR REPLACE FUNCTION pontuacao_jogador() RETURNS TRIGGER
 LANGUAGE plpgsql
@@ -198,8 +216,6 @@ BEGIN
 END;
 $$;
 ```
-
-### Da Tabela Estatísticas do jogador
 - Sempre que houver uma inserção ou atualização em alguma tupla, verificar se o somátorio do número de gols de todos os jogadores de um dado time excedeu o número de gols que esse time fez na partida.
 ``` plpgsql
 create or replace function verifica_qtd_gols_jogador() returns trigger
