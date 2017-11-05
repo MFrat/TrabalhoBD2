@@ -182,6 +182,7 @@ $$;
 
 ### Da Tabela Jogador
 1. Incluir status do jogador
+
 Incluir status do jogador sempre que houver uma inserção na tabela Jogador.
 ``` plpgsql
 CREATE TRIGGER trigger_status_jogador_jogador
