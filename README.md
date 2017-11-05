@@ -20,7 +20,7 @@
     6. [Da Tabela Formação](#da-tabela-formacao)
     7. [Da Tabela Pontuação do Jogador](#da-tabela-pontuação-do-jogador)
     8. [Da Tabela Estatísticas do Jogador](#da-tabela-estatísticas-do-jogador)
-5. [Outras consultas](outras-consultas)
+5. [Outras consultas](#outras-consultas)
     1. [Classificação de um campeonato](classificação-do-campeonato)
 
 ## Visão Geral
