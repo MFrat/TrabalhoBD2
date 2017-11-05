@@ -173,10 +173,6 @@ BEGIN
 END;
 $$;
 ```
-
-### Da Tabela Pontuação do jogador
-
-
 ### Da Tabela Estatísticas do jogador
 - A cada inserção de tupla na tabela de Estatísticas do Jogador a respectiva pontuação deve ser calculada.
 ``` plpgsql
