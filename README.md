@@ -218,6 +218,13 @@ $$;
 ```
 - Sempre que houver uma inserção ou atualização em alguma tupla, verificar se o somátorio do número de gols de todos os jogadores de um dado time excedeu o número de gols que esse time fez na partida.
 ``` plpgsql
+CREATE TRIGGER trigger_qtd_gols_jogador
+AFTER INSERT OR UPDATE
+  ON estatisticas_jogador
+FOR EACH ROW
+EXECUTE PROCEDURE verifica_qtd_gols_jogador();
+```
+``` plpgsql
 create or replace function verifica_qtd_gols_jogador() returns trigger
 LANGUAGE plpgsql
 AS $$
@@ -265,6 +272,13 @@ $$;
 ```
 - Não pode haver mais de um cartão vermelho e nem mais de dois amarelos.
 ``` plpgsql
+CREATE TRIGGER trigger_verifica_cartoes
+BEFORE INSERT OR UPDATE
+  ON estatisticas_jogador
+FOR EACH ROW
+EXECUTE PROCEDURE verifica_cartoes();
+```
+``` plpgsql
 create or REPLACE function verifica_cartoes() returns trigger
 LANGUAGE plpgsql
 AS $$
@@ -282,6 +296,13 @@ END;
 $$;
 ```
 - Um jogador só pode ter uma estatística se a partida na qual a estatística está ligada envolveu o seu time.
+``` plpgsql
+CREATE TRIGGER trigger_verifica_time_jogador_partida_estatistica
+BEFORE INSERT OR UPDATE
+  ON estatisticas_jogador
+FOR EACH ROW
+EXECUTE PROCEDURE verifica_time_jogador_partida_estatistica();
+```
 ``` plpgsql
 create or REPLACE function verifica_time_jogador_partida_estatistica() returns trigger
 LANGUAGE plpgsql
