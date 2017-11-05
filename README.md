@@ -98,14 +98,14 @@ DECLARE
   pos VARCHAR(100);
   posNew VARCHAR(100);
 BEGIN
+   SELECT posicao INTO posNew
+   FROM "cartolaFC".jogador
+   WHERE NEW."idJogador" = "idJogador";
+
   FOR i IN cur LOOP
     SELECT posicao INTO pos
     FROM "cartolaFC".jogador
     WHERE i."idJogador" = "idJogador";
-
-    SELECT posicao INTO posNew
-    FROM "cartolaFC".jogador
-    WHERE NEW."idJogador" = "idJogador";
 
     IF pos = 'Zagueiro' OR posNew = 'Zagueiro' THEN
       nZag := nZag + 1;
