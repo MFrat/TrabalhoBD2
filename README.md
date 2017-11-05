@@ -94,6 +94,12 @@ END;
 $$;
 ```
 
+### Da Tabela Rodada
+- Só pode haver uma rodada de um campeonato por data.
+``` plpgsql
+unique_index_rodada UNIQUE INDEX rodada (data ASC, idcampeonato ASC)
+```
+
 ### Da Tabela JogadorTimeUsuario
 - O número de jogadores em cada posição não pode exceder ao número imposto pela formação do time escolhida pelo usuário.
 
