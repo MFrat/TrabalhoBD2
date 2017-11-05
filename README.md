@@ -21,7 +21,7 @@
     7. [Da Tabela Pontuação do Jogador](#da-tabela-pontuação-do-jogador)
     8. [Da Tabela Estatísticas do Jogador](#da-tabela-estatísticas-do-jogador)
 5. [Outras consultas](outras-consultas)
-    1. [Classificação de um campeonato](classificação-de-um-campeonato)
+    1. [Classificação de um campeonato](classificação-do-campeonato)
 
 ## Visão Geral
 Modelagem, simplificada, das relações das entidades e regras de negócios do CartolaFC.
