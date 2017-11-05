@@ -247,8 +247,9 @@ BEGIN
   RETURN NEW;
 END;
 $$;
-
 ```
+- Não pode haver mais de um cartão vermelho vermelho.
+- Não pode haver mais de dois amarelos.
 
 ## Outras consultas
 
