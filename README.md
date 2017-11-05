@@ -20,15 +20,16 @@
     6. [Da Tabela Formação](#da-tabela-formacao)
     7. [Da Tabela Pontuação do Jogador](#da-tabela-pontuação-do-jogador)
     8. [Da Tabela Estatísticas do Jogador](#da-tabela-estatísticas-do-jogador)
+    9. [Da Tabela Status do Jogador](#da-tabela-status-do-jogador)
 5. [Outras consultas](#outras-consultas)
     1. [Classificação de um campeonato](#classificação-do-campeonato)
 
 ## Visão Geral
-Modelagem, simplificada, das relações das entidades e regras de negócios do CartolaFC.
+Modelagem, simplificada, das relações das entidades e regras de negócios do CartolaFC do Globoesporte.com.
 
 ## Modelo
 
-### Diagrama de relacionamento
+### Diagrama de relacionamentos
 
 <p align="center">
   <img src="https://i.imgur.com/yoPlsCR.jpg" width="900"/>
@@ -179,11 +180,8 @@ BEGIN
 END;
 $$;
 ```
-
 ### Da Tabela Jogador
-1. Incluir status do jogador
-
-Incluir status do jogador sempre que houver uma inserção na tabela Jogador.
+- Incluir status do jogador sempre que houver uma inserção na tabela Jogador.
 ``` plpgsql
 CREATE TRIGGER trigger_status_jogador_jogador
 AFTER INSERT
@@ -381,6 +379,9 @@ BEGIN
 END;
 $$;
 ```
+
+### Da Tabela Status do Jogador
+- Um jogador não pode ter um status para um partida na qual seu time não está envolvido.
 
 ## Outras consultas
 
