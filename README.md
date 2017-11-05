@@ -248,7 +248,7 @@ BEGIN
 END;
 $$;
 ```
-- Não pode haver mais de um cartão vermelho vermelho e nem mais de dois amarelos.
+- Não pode haver mais de um cartão vermelho e nem mais de dois amarelos.
 ``` plpgsql
 create or REPLACE function verifica_cartoes() returns trigger
 LANGUAGE plpgsql
@@ -266,7 +266,7 @@ BEGIN
 END;
 $$;
 ```
-- Um jogador só pode ter uma estatística se a partida na qual a estatística está envolveu o seu time.
+- Um jogador só pode ter uma estatística se a partida na qual a estatística está ligada envolveu o seu time.
 
 ## Outras consultas
 
