@@ -203,6 +203,33 @@ END;
 $$;
 ```
 
+### Da Tabela Pontuação do Jogador
+- Sempre que houver uma inserção ou atualização de uma tupla, calcular e inserir ou atualizar o preço do jogador em uma partida.
+``` plpgsql
+CREATE TRIGGER trigger_atualiza_preco_jogador
+AFTER INSERT OR UPDATE
+  ON pontuacao_jogador
+FOR EACH ROW
+EXECUTE PROCEDURE atualiza_preco_jogador();
+```
+
+``` plpgsql
+create or REPLACE function atualiza_preco_jogador() returns trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  IF TG_OP = 'UPDATE' THEN
+    UPDATE "cartolaFC".preco_jogador SET preco = (NEW.pontuacao * 2)
+    WHERE idpartida = NEW.idpartida AND idjogador = NEW.idjogador;
+  ELSEIF TG_OP = 'INSERT' THEN
+    INSERT INTO "cartolaFC".preco_jogador(idjogador, idpartida, preco) VALUES (NEW.idjogador, NEW.idpartida, (NEW.pontuacao * 2));
+  END IF;
+
+  RETURN NEW;
+END;
+$$;
+```
+
 ### Da Tabela Estatísticas do jogador
 - A cada inserção de tupla na tabela de Estatísticas do Jogador a respectiva pontuação deve ser calculada.
 ``` plpgsql
