@@ -382,6 +382,39 @@ $$;
 
 ### Da Tabela Status do Jogador
 - Um jogador não pode ter um status para um partida na qual seu time não está envolvido.
+``` plpgsql
+CREATE TRIGGER trigger_verifica_partida_status_jogador
+BEFORE INSERT OR UPDATE
+  ON status_jogador
+FOR EACH ROW
+EXECUTE PROCEDURE verifica_partida_status_jogador();
+```
+
+``` plpgsql
+create or REPLACE function verifica_partida_status_jogador() returns trigger
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  idTimeJogador INTEGER;
+  time1 INTEGER;
+  time2 INTEGER;
+BEGIN
+  SELECT "idTime" INTO idTimeJogador
+  FROM "cartolaFC".jogador jogador
+  WHERE jogador."idJogador" = NEW."idJogador";
+
+  SELECT partida.idtime1, partida.idtime2 INTO time1, time2
+  FROM "cartolaFC".partida partida
+  WHERE partida.idpartida = NEW.idpartida;
+
+  IF idTimeJogador <> time1 AND idTimeJogador <> time2 THEN
+    RAISE EXCEPTION 'Não pode haver status de um jogador para uma partida na qual seu time não esteja envolvido';
+  END IF;
+
+  RETURN NEW;
+END;
+$$;
+```
 
 ## Outras consultas
 
