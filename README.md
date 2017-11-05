@@ -265,8 +265,8 @@ BEGIN
   RETURN NEW;
 END;
 $$;
-
 ```
+- Um jogador só pode ter uma estatística se a partida na qual a estatística está envolveu o seu time.
 
 ## Outras consultas
 
