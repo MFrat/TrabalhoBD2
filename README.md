@@ -201,7 +201,7 @@ $$;
 ```
 
 ### Da Tabela Estatísticas do jogador
-- Sempre que houver uma inserção ou atualização em alguma tupla, verificar se o somátorio do número de gols de todos os jogadores de um dado time excedeu o némero de gols que esse time fez na partida.
+- Sempre que houver uma inserção ou atualização em alguma tupla, verificar se o somátorio do número de gols de todos os jogadores de um dado time excedeu o número de gols que esse time fez na partida.
 ``` plpgsql
 create or replace function verifica_qtd_gols_jogador() returns trigger
 LANGUAGE plpgsql
