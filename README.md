@@ -487,20 +487,31 @@ LANGUAGE 'plpgsql';
 
 ### Pontuação do time de um usuário
 ``` plpgsql
-CREATE OR REPLACE FUNCTION "cartolaFC".pontuacao_time_usuario(idTimeUsuario INTEGER) RETURNS INTEGER
+create or replace function pontuacao_time_usuario(timeusuario integer, rodada integer) returns integer
 LANGUAGE plpgsql
-AS
-$$
+AS $$
 DECLARE
-  pontuacao INTEGER := 0;
+  pont INTEGER := 0;
+  cJogador CURSOR FOR SELECT * FROM "cartolaFC".jogador_time_usuario WHERE "idTimeUsuario" = timeusuario;
+  fPontuacao INTEGER := 0;
 BEGIN
-  SELECT SUM(preco) INTO pontuacao
-  FROM "cartolaFC".preco_jogador JOIN "cartolaFC".jogador_time_usuario
-  ON "cartolaFC".preco_jogador.idjogador = "cartolaFC".jogador_time_usuario."idJogador"
-  WHERE "idTimeUsuario" = idTimeUsuario
-  GROUP BY "idTimeUsuario";
 
-  RETURN pontuacao;
+  FOR j IN cJogador LOOP
+    IF NOT EXISTS(SELECT 1
+      FROM "cartolaFC".jogador JOIN "cartolaFC".status_jogador ON "cartolaFC".jogador."idJogador" = "cartolaFC".status_jogador."idJogador"
+      WHERE "cartolaFC".jogador."idJogador" = j."idJogador") THEN
+
+      SELECT "cartolaFC".pontuacao_jogador.pontuacao INTO pont
+      FROM "cartolaFC".pontuacao_jogador NATURAL JOIN "cartolaFC".partida
+      WHERE "cartolaFC".pontuacao_jogador.idjogador = j."idJogador" AND "cartolaFC".partida.idrodada = rodada;
+
+      IF NOT pont ISNULL THEN
+        fPontuacao := fPontuacao + pont;
+      END IF;
+    END IF;
+  END LOOP;
+
+  RETURN fPontuacao;
 END;
-$$
+$$;
 ```
