@@ -497,7 +497,7 @@ BEGIN
   SELECT SUM(preco) INTO pontuacao
   FROM "cartolaFC".preco_jogador JOIN "cartolaFC".jogador_time_usuario
   ON "cartolaFC".preco_jogador.idjogador = "cartolaFC".jogador_time_usuario."idJogador"
-  WHERE "idTimeUsuario" = 1
+  WHERE "idTimeUsuario" = idTimeUsuario
   GROUP BY "idTimeUsuario";
 
   RETURN pontuacao;
