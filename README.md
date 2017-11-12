@@ -484,3 +484,23 @@ END;
 $$
 LANGUAGE 'plpgsql';
 ```
+
+### Pontuação do time de um usuário
+``` plpgsql
+CREATE OR REPLACE FUNCTION "cartolaFC".pontuacao_time_usuario(idTimeUsuario INTEGER) RETURNS INTEGER
+LANGUAGE plpgsql
+AS
+$$
+DECLARE
+  pontuacao INTEGER := 0;
+BEGIN
+  SELECT SUM(preco) INTO pontuacao
+  FROM "cartolaFC".preco_jogador JOIN "cartolaFC".jogador_time_usuario
+  ON "cartolaFC".preco_jogador.idjogador = "cartolaFC".jogador_time_usuario."idJogador"
+  WHERE "idTimeUsuario" = 1
+  GROUP BY "idTimeUsuario";
+
+  RETURN pontuacao;
+END;
+$$
+```
