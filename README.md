@@ -478,7 +478,7 @@ LANGUAGE 'plpgsql';
 ```
 
 ### Pontuação do time de um usuário
-A pontuação do time do usuário só leva em consideração os jogadores que não possuem status(machucado, suspenso e etc) para uma partida de um rodada.
+A pontuação do time do usuário só leva em consideração os jogadores que não possuem status(machucado, suspenso e etc) para uma partida de uma rodada.
 ``` plpgsql
 create or replace function pontuacao_time_usuario(timeusuario integer, rodada integer) returns integer
 LANGUAGE plpgsql
