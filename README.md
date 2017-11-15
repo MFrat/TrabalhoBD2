@@ -43,8 +43,8 @@ Modelagem, simplificada, das relações das entidades e regras de negócios do C
 ## Tabelas
 
 ### Status Jogador
-<p align="center">
-  <img src="https://i.imgur.com/Sd9nJhL.jpg" width="500"/>
+<p align="start">
+  <img src="https://i.imgur.com/Sd9nJhL.jpg" width="300"/>
 </p>
 
 Tabela que representa um status de um jogador para uma partida.
