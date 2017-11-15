@@ -22,19 +22,23 @@
     9. [Da Tabela Status do Jogador](#da-tabela-status-do-jogador)
 5. [Outras consultas](#outras-consultas)
     1. [Classificação de um campeonato](#classificação-do-campeonato)
+    2. [Pontuação do time de um usuário](#pontuação-do-time-de-um-usuário)
 
 ## Visão Geral
 Modelagem, simplificada, das relações das entidades e regras de negócios do CartolaFC do Globoesporte.com.
 
 ## Modelo
 
-### Diagrama de relacionamentos
+### Diagrama de relacionamento
 
 <p align="center">
   <img src="https://i.imgur.com/yoPlsCR.jpg" width="900"/>
 </p>
 
 ### Modelo lógico
+<p align="center">
+  <img src="https://i.imgur.com/UCPBkJF.jpg" width="900"/>
+</p>
 
 ## Tabelas
 
