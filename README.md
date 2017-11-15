@@ -42,6 +42,15 @@ Modelagem, simplificada, das relações das entidades e regras de negócios do C
 
 ## Tabelas
 
+### Status Jogador
+<p align="center">
+  <img src="https://i.imgur.com/Sd9nJhL.jpg" width="500"/>
+</p>
+
+Tabela que representa um status de um jogador para uma partida.
+Todos os jogadores que possuem tuplas nessa tabela, estão/estavam inabilitados à jogar tal partida.
+Sendo que tais status são representados por números inteiros.
+
 ## Regras de negócio
 ### Da Tabela Partida
 - Um time só pode ter uma partida por rodada de um campeonato.
@@ -469,6 +478,7 @@ LANGUAGE 'plpgsql';
 ```
 
 ### Pontuação do time de um usuário
+A pontuação do time do usuário só leva em consideração os jogadores que não possuem status(machucado, suspenso e etc) para uma partida de um rodada.
 ``` plpgsql
 create or replace function pontuacao_time_usuario(timeusuario integer, rodada integer) returns integer
 LANGUAGE plpgsql
