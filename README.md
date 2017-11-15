@@ -284,7 +284,7 @@ BEGIN
   SELECT SUM(numerogols) INTO nGolsJogadores
   FROM "cartolaFC".estatisticas_jogador
   JOIN "cartolaFC".jogador ON "cartolaFC".jogador."idJogador" = "cartolaFC".estatisticas_jogador.idjogador
-  WHERE "idTime" = idTimeJogador
+  WHERE "idTime" = idTimeJogador and "cartolaFC".estatisticas_jogador.idpartida = NEW.idpartida
   GROUP BY "idTime";
 
   SELECT golstime1 INTO nGols1
