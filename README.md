@@ -8,9 +8,8 @@
     1. [Partida](#partida)
     2. [Rodada](#rodada)
     3. [TimeUsuario](#timeusuario)
-    4. [Jogador](#jogador)
-    5. [Campeonato](#campeonato)
-    6. [Formação](#formacao)
+    4. [Campeonato](#campeonato)
+    5. [Formação](#formacao)
 4. [Regras de negócio](#regras-de-negócio)
     1. [Da Tabela Partida](#da-tabela-partida)
     2. [Da Tabela Rodada](#da-tabela-rodada)
@@ -177,26 +176,6 @@ BEGIN
 
   RETURN NEW;
 
-END;
-$$;
-```
-### Da Tabela Jogador
-- Incluir status do jogador sempre que houver uma inserção na tabela Jogador.
-``` plpgsql
-CREATE TRIGGER trigger_status_jogador_jogador
-AFTER INSERT
-  ON jogador
-FOR EACH ROW
-EXECUTE PROCEDURE status_jogador();
-```
-
-``` plpgsql
-CREATE OR REPLACE FUNCTION status_jogador() RETURNS TRIGGER
-LANGUAGE plpgsql
-AS $$
-BEGIN
-    INSERT INTO "cartolaFC".status_jogador("idJogador", status) VALUES (NEW."idJogador", 0);
-    RETURN NEW;
 END;
 $$;
 ```
