@@ -4,13 +4,7 @@
 2. [Modelo](#modelo)
     1. [Diagrama de relacionamento](#diagrama-de-relacionamento)
     2. [Modelo lógico](#modelo-lógico)
-3. [Tabelas](#tabelas)
-    1. [Partida](#partida)
-    2. [Rodada](#rodada)
-    3. [TimeUsuario](#timeusuario)
-    4. [Campeonato](#campeonato)
-    5. [Formação](#formacao)
-4. [Regras de negócio](#regras-de-negócio)
+3. [Regras de negócio](#regras-de-negócio)
     1. [Da Tabela Partida](#da-tabela-partida)
     2. [Da Tabela Rodada](#da-tabela-rodada)
     3. [Da Tabela JogadorTimeUsuario](#da-tabela-jogadortimeusuario)
@@ -20,7 +14,7 @@
     7. [Da Tabela Pontuação do Jogador](#da-tabela-pontuação-do-jogador)
     8. [Da Tabela Estatísticas do Jogador](#da-tabela-estatísticas-do-jogador)
     9. [Da Tabela Status do Jogador](#da-tabela-status-do-jogador)
-5. [Outras consultas](#outras-consultas)
+4. [Outras consultas](#outras-consultas)
     1. [Classificação de um campeonato](#classificação-do-campeonato)
     2. [Pontuação do time de um usuário](#pontuação-do-time-de-um-usuário)
 
@@ -39,17 +33,6 @@ Modelagem, simplificada, das relações das entidades e regras de negócios do C
 <p align="center">
   <img src="https://i.imgur.com/UCPBkJF.jpg" width="900"/>
 </p>
-
-## Tabelas
-
-### Status Jogador
-<p align="start">
-  <img src="https://i.imgur.com/Sd9nJhL.jpg" width="300"/>
-</p>
-
-Tabela que representa um status de um jogador para uma partida.
-Todos os jogadores que possuem tuplas nessa tabela, estão/estavam inabilitados à jogar tal partida.
-Sendo que tais status são representados por números inteiros.
 
 ## Regras de negócio
 ### Da Tabela Partida
