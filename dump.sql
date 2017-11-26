@@ -14,118 +14,6 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
-SET search_path = "cartolaFC", pg_catalog;
-
-ALTER TABLE IF EXISTS ONLY "cartolaFC".rodada DROP CONSTRAINT IF EXISTS rodada_campeonato_idcampeonato_fk;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".preco_jogador DROP CONSTRAINT IF EXISTS preco_jogador_partida_idpartida_fk;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".preco_jogador DROP CONSTRAINT IF EXISTS preco_jogador_jogador_idjogador_fk;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".pontuacao_jogador DROP CONSTRAINT IF EXISTS pontuacao_jogador_rodada_idrodada_fk;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".pontuacao_jogador DROP CONSTRAINT IF EXISTS pontuacao_jogador_jogador_idjogador_fk;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".partida DROP CONSTRAINT IF EXISTS partida_time_idtime_fk2;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".partida DROP CONSTRAINT IF EXISTS partida_time_idtime_fk;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".partida DROP CONSTRAINT IF EXISTS partida_rodada_idrodada_fk;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".jogador_time_usuario DROP CONSTRAINT IF EXISTS jogador_time_usuario_jogador_idjogador_fk;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".time_usuario DROP CONSTRAINT IF EXISTS fk_timeusuario_usuario;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".time_usuario DROP CONSTRAINT IF EXISTS fk_timeusuario_formacao;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".status_jogador DROP CONSTRAINT IF EXISTS fk_statusjogador_jogador;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".jogador_time_usuario DROP CONSTRAINT IF EXISTS fk_jogadortimeusuario_timeusuario;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".jogador DROP CONSTRAINT IF EXISTS fk_jogador_time;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".classificacao DROP CONSTRAINT IF EXISTS fk_classificacao_time;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".estatisticas_jogador DROP CONSTRAINT IF EXISTS estatisticas_jogador_partida_idpartida_fk;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".estatisticas_jogador DROP CONSTRAINT IF EXISTS estatisticas_jogador_jogador_idjogador_fk;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".classificacao DROP CONSTRAINT IF EXISTS classificacao_campeonato_idcampeonato_fk;
-DROP TRIGGER IF EXISTS verifica_qtd_partidas ON "cartolaFC".partida;
-DROP TRIGGER IF EXISTS verifica_partida ON "cartolaFC".partida;
-DROP TRIGGER IF EXISTS trigger_verificia_time_usuario_formacao ON "cartolaFC".jogador_time_usuario;
-DROP TRIGGER IF EXISTS trigger_verifica_time_jogador_partida_estatistica ON "cartolaFC".estatisticas_jogador;
-DROP TRIGGER IF EXISTS trigger_verifica_cartoes ON "cartolaFC".estatisticas_jogador;
-DROP TRIGGER IF EXISTS trigger_status_jogador_jogador ON "cartolaFC".jogador;
-DROP TRIGGER IF EXISTS trigger_qtd_gols_jogador ON "cartolaFC".estatisticas_jogador;
-DROP TRIGGER IF EXISTS trigger_pontuacao_jogador ON "cartolaFC".estatisticas_jogador;
-DROP TRIGGER IF EXISTS insere_classificacao ON "cartolaFC"."time";
-DROP TRIGGER IF EXISTS atualiza_classificacao2 ON "cartolaFC".partida;
-DROP TRIGGER IF EXISTS atualiza_classificacao ON "cartolaFC".partida;
-DROP INDEX IF EXISTS "cartolaFC".rodada_data_idcampeonato_uindex;
-DROP INDEX IF EXISTS "cartolaFC".preco_jogador_idjogador_idpartida_uindex;
-DROP INDEX IF EXISTS "cartolaFC".partida_inex_uq;
-DROP INDEX IF EXISTS "cartolaFC".partida_idtime4_uindex;
-DROP INDEX IF EXISTS "cartolaFC".partida_idtime3_uindex;
-DROP INDEX IF EXISTS "cartolaFC".jogador_time_usuario_idjogador_idtimeusuario_uindex;
-DROP INDEX IF EXISTS "cartolaFC".jogador_nome_posicao_uindex;
-DROP INDEX IF EXISTS "cartolaFC".estatisticas_jogador_idjogador_idrodada_uindex;
-DROP INDEX IF EXISTS "cartolaFC".classificacao_idtime_uindex;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".usuario DROP CONSTRAINT IF EXISTS usuario_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".usuario DROP CONSTRAINT IF EXISTS uq_usuario_login;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".time_usuario DROP CONSTRAINT IF EXISTS time_usuario_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC"."time" DROP CONSTRAINT IF EXISTS time_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC"."time" DROP CONSTRAINT IF EXISTS time_nome_key;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".status_jogador DROP CONSTRAINT IF EXISTS status_jogadpr_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".rodada DROP CONSTRAINT IF EXISTS rodada_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".preco_jogador DROP CONSTRAINT IF EXISTS preco_jogador_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".pontuacao_jogador DROP CONSTRAINT IF EXISTS pontuacao_jogador_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".partida DROP CONSTRAINT IF EXISTS partida_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".jogador_time_usuario DROP CONSTRAINT IF EXISTS jogador_time_usuario_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".jogador DROP CONSTRAINT IF EXISTS jogador_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".formacao DROP CONSTRAINT IF EXISTS formacao_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".estatisticas_jogador DROP CONSTRAINT IF EXISTS estatisticas_jogador_idestatisticajogador_pk;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".classificacao DROP CONSTRAINT IF EXISTS classificacao_pkey;
-ALTER TABLE IF EXISTS ONLY "cartolaFC".campeonato DROP CONSTRAINT IF EXISTS campeonato_pkey;
-ALTER TABLE IF EXISTS "cartolaFC".usuario ALTER COLUMN "idUsuario" DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".time_usuario ALTER COLUMN "idTimeUsuario" DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC"."time" ALTER COLUMN "idTime" DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".status_jogador ALTER COLUMN "idStatusJogador" DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".rodada ALTER COLUMN idrodada DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".preco_jogador ALTER COLUMN idprecojogador DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".pontuacao_jogador ALTER COLUMN idpontuacaojogador DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".partida ALTER COLUMN idpartida DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".jogador_time_usuario ALTER COLUMN "idJogadorTimeUsuario" DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".jogador ALTER COLUMN "idJogador" DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".formacao ALTER COLUMN "idFormacao" DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".estatisticas_jogador ALTER COLUMN idestatisticajogador DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".classificacao ALTER COLUMN "idClassificacao" DROP DEFAULT;
-ALTER TABLE IF EXISTS "cartolaFC".campeonato ALTER COLUMN idcampeonato DROP DEFAULT;
-DROP SEQUENCE IF EXISTS "cartolaFC"."usuario_idUsuario_seq";
-DROP TABLE IF EXISTS "cartolaFC".usuario;
-DROP SEQUENCE IF EXISTS "cartolaFC"."time_usuario_idTimeUsuario_seq";
-DROP TABLE IF EXISTS "cartolaFC".time_usuario;
-DROP SEQUENCE IF EXISTS "cartolaFC"."time_idTime_seq";
-DROP TABLE IF EXISTS "cartolaFC"."time";
-DROP SEQUENCE IF EXISTS "cartolaFC"."status_jogadpr_idStatusJogador_seq";
-DROP TABLE IF EXISTS "cartolaFC".status_jogador;
-DROP SEQUENCE IF EXISTS "cartolaFC".rodada_idrodada_seq;
-DROP TABLE IF EXISTS "cartolaFC".rodada;
-DROP SEQUENCE IF EXISTS "cartolaFC".preco_jogador_idprecojogador_seq;
-DROP TABLE IF EXISTS "cartolaFC".preco_jogador;
-DROP SEQUENCE IF EXISTS "cartolaFC".pontuacao_jogador_idpontuacaojogador_seq;
-DROP TABLE IF EXISTS "cartolaFC".pontuacao_jogador;
-DROP SEQUENCE IF EXISTS "cartolaFC".partida_idpartida_seq;
-DROP TABLE IF EXISTS "cartolaFC".partida;
-DROP SEQUENCE IF EXISTS "cartolaFC"."jogador_time_usuario_idJogadorTimeUsuario_seq";
-DROP TABLE IF EXISTS "cartolaFC".jogador_time_usuario;
-DROP SEQUENCE IF EXISTS "cartolaFC"."jogador_idJogador_seq";
-DROP TABLE IF EXISTS "cartolaFC".jogador;
-DROP SEQUENCE IF EXISTS "cartolaFC"."formacao_idFormacao_seq";
-DROP TABLE IF EXISTS "cartolaFC".formacao;
-DROP SEQUENCE IF EXISTS "cartolaFC".estatisticas_jogador_idestatisticajogador_seq;
-DROP TABLE IF EXISTS "cartolaFC".estatisticas_jogador;
-DROP SEQUENCE IF EXISTS "cartolaFC"."classificacao_idClassificacao_seq";
-DROP TABLE IF EXISTS "cartolaFC".classificacao;
-DROP SEQUENCE IF EXISTS "cartolaFC".campeonato_idcampeonato_seq;
-DROP TABLE IF EXISTS "cartolaFC".campeonato;
-DROP FUNCTION IF EXISTS "cartolaFC".verifica_time_jogador_partida_estatistica();
-DROP FUNCTION IF EXISTS "cartolaFC".verifica_qtd_partida_rodada();
-DROP FUNCTION IF EXISTS "cartolaFC".verifica_qtd_gols_jogador();
-DROP FUNCTION IF EXISTS "cartolaFC".verifica_jogo_rodada();
-DROP FUNCTION IF EXISTS "cartolaFC".verifica_cartoes();
-DROP FUNCTION IF EXISTS "cartolaFC".time_usuario_valido_qtd_jogadores();
-DROP FUNCTION IF EXISTS "cartolaFC".time_usuario_valido("time" integer);
-DROP FUNCTION IF EXISTS "cartolaFC".status_jogador();
-DROP FUNCTION IF EXISTS "cartolaFC".pontuacao_jogador();
-DROP FUNCTION IF EXISTS "cartolaFC".insert_classificacao();
-DROP FUNCTION IF EXISTS "cartolaFC".get_classificacao(idcamp integer);
-DROP FUNCTION IF EXISTS "cartolaFC".atualiza_classificacao2();
-DROP FUNCTION IF EXISTS "cartolaFC".atualiza_classificacao();
-DROP SCHEMA IF EXISTS "cartolaFC";
 --
 -- Name: cartolaFC; Type: SCHEMA; Schema: -; Owner: postgres
 --
@@ -138,114 +26,26 @@ ALTER SCHEMA "cartolaFC" OWNER TO postgres;
 SET search_path = "cartolaFC", pg_catalog;
 
 --
--- Name: atualiza_classificacao(); Type: FUNCTION; Schema: cartolaFC; Owner: postgres
+-- Name: atualiza_preco_jogador(); Type: FUNCTION; Schema: cartolaFC; Owner: postgres
 --
 
-CREATE FUNCTION atualiza_classificacao() RETURNS trigger
+CREATE FUNCTION atualiza_preco_jogador() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
-DECLARE
-  nPontos INTEGER := 0;
-  nVitorias INTEGER := 0;
-  nEmpates INTEGER := 0;
-  nDerrotas INTEGER := 0;
-  campId INTEGER;
 BEGIN
-  SELECT pontos, vitorias, empates, derrotas INTO nPontos, nVitorias, nEmpates, nDerrotas
-  FROM "cartolaFC".classificacao
-  WHERE "idTime" = NEW.idtime1;
-
-  SELECT idCampeonato INTO campId
-  FROM "cartolaFC".rodada NATURAL JOIN "cartolaFC".partida
-  WHERE partida.idpartida = NEW.idpartida;
-
-  IF NEW.golstime1 > NEW.golstime2 THEN
-    nPontos := nPontos + 3;
-    nVitorias := nVitorias + 1;
-    nEmpates := nEmpates + 0;
-    nDerrotas := nDerrotas + 0;
-  ELSEIF NEW.golstime1 < NEW.golstime2 THEN
-    nPontos := nPontos + 0;
-    nVitorias := nVitorias + 0;
-    nEmpates := nEmpates + 0;
-    nDerrotas := nDerrotas + 1;
-  ELSE
-    nPontos := nPontos + 1;
-    nVitorias := nVitorias + 0;
-    nEmpates := nEmpates + 1;
-    nDerrotas := nDerrotas + 0;
+  IF TG_OP = 'UPDATE' THEN
+    UPDATE "cartolaFC".preco_jogador SET preco = (NEW.pontuacao * 2)
+    WHERE idpartida = NEW.idpartida AND idjogador = NEW.idjogador;
+  ELSEIF TG_OP = 'INSERT' THEN
+    INSERT INTO "cartolaFC".preco_jogador(idjogador, idpartida, preco) VALUES (NEW.idjogador, NEW.idpartida, (NEW.pontuacao * 2));
   END IF;
-
-  UPDATE "cartolaFC".classificacao SET
-    pontos =  nPontos,
-    empates = nEmpates,
-    vitorias =  nVitorias,
-    derrotas = nDerrotas,
-    "nJogos" =  "cartolaFC".classificacao."nJogos" + 1,
-    idcamp = campId
-  WHERE "idTime" = NEW.idtime1;
 
   RETURN NEW;
 END;
 $$;
 
 
-ALTER FUNCTION "cartolaFC".atualiza_classificacao() OWNER TO postgres;
-
---
--- Name: atualiza_classificacao2(); Type: FUNCTION; Schema: cartolaFC; Owner: postgres
---
-
-CREATE FUNCTION atualiza_classificacao2() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-  nPontos INTEGER := 0;
-  nVitorias INTEGER := 0;
-  nEmpates INTEGER := 0;
-  nDerrotas INTEGER := 0;
-  campId INTEGER;
-BEGIN
-  SELECT pontos, vitorias, empates, derrotas INTO nPontos, nVitorias, nEmpates, nDerrotas
-  FROM "cartolaFC".classificacao
-  WHERE "idTime" = NEW.idtime2;
-
-  SELECT idCampeonato INTO campId
-  FROM "cartolaFC".rodada NATURAL JOIN "cartolaFC".partida
-  WHERE partida.idpartida = NEW.idpartida;
-
-  IF NEW.golstime2 > NEW.golstime1 THEN
-    nPontos := nPontos + 3;
-    nVitorias := nVitorias + 1;
-    nEmpates := nEmpates + 0;
-    nDerrotas := nDerrotas + 0;
-  ELSEIF NEW.golstime2 < NEW.golstime1 THEN
-    nPontos := nPontos + 0;
-    nVitorias := nVitorias + 0;
-    nEmpates := nEmpates + 0;
-    nDerrotas := nDerrotas + 1;
-  ELSE
-    nPontos := nPontos + 1;
-    nVitorias := nVitorias + 0;
-    nEmpates := nEmpates + 1;
-    nDerrotas := nDerrotas + 0;
-  END IF;
-
-  UPDATE "cartolaFC".classificacao SET
-    pontos =  nPontos,
-    empates = nEmpates,
-    vitorias =  nVitorias,
-    derrotas = nDerrotas,
-    "nJogos" =  "cartolaFC".classificacao."nJogos" + 1,
-    idcamp = campId
-  WHERE "idTime" = NEW.idtime2;
-
-  RETURN NEW;
-END;
-$$;
-
-
-ALTER FUNCTION "cartolaFC".atualiza_classificacao2() OWNER TO postgres;
+ALTER FUNCTION "cartolaFC".atualiza_preco_jogador() OWNER TO postgres;
 
 --
 -- Name: get_classificacao(integer); Type: FUNCTION; Schema: cartolaFC; Owner: postgres
@@ -313,24 +113,6 @@ $$;
 ALTER FUNCTION "cartolaFC".get_classificacao(idcamp integer) OWNER TO postgres;
 
 --
--- Name: insert_classificacao(); Type: FUNCTION; Schema: cartolaFC; Owner: postgres
---
-
-CREATE FUNCTION insert_classificacao() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-  INSERT INTO "cartolaFC".classificacao(pontos, "nJogos", vitorias, empates, derrotas, "idTime") VALUES
-    (0, 0, 0, 0, 0, NEW."idTime");
-
-  return NULL;
-END;
-$$;
-
-
-ALTER FUNCTION "cartolaFC".insert_classificacao() OWNER TO postgres;
-
---
 -- Name: pontuacao_jogador(); Type: FUNCTION; Schema: cartolaFC; Owner: postgres
 --
 
@@ -350,12 +132,12 @@ BEGIN
   pontos := pontos + NEW.defesas * 2;
 
   IF(TG_OP = 'INSERT') THEN
-    INSERT INTO "cartolaFC".pontuacao_jogador(pontuacao, idrodada, idjogador) VALUES (pontos, NEW.idpartida, NEW.idjogador);
+    INSERT INTO "cartolaFC".pontuacao_jogador(pontuacao, idpartida, idjogador) VALUES (pontos, NEW.idpartida, NEW.idjogador);
   END IF;
 
   IF(TG_OP = 'UPDATE') THEN
-    UPDATE "cartolaFC".pontuacao_jogador SET pontuacao = pontos, idrodada = NEW.idpartida, idjogador = NEW.idjogador
-    WHERE idrodada = OLD.idpartida AND idjogador = OLD.idjogador;
+    UPDATE "cartolaFC".pontuacao_jogador SET pontuacao = pontos, idpartida = NEW.idpartida, idjogador = NEW.idjogador
+    WHERE idpartida = OLD.idpartida AND idjogador = OLD.idjogador;
   END IF;
 
   RETURN NEW;
@@ -366,20 +148,43 @@ $$;
 ALTER FUNCTION "cartolaFC".pontuacao_jogador() OWNER TO postgres;
 
 --
--- Name: status_jogador(); Type: FUNCTION; Schema: cartolaFC; Owner: postgres
+-- Name: pontuacao_time_usuario(integer, integer); Type: FUNCTION; Schema: cartolaFC; Owner: postgres
 --
 
-CREATE FUNCTION status_jogador() RETURNS trigger
+CREATE FUNCTION pontuacao_time_usuario(timeusuario integer, rodada integer) RETURNS integer
     LANGUAGE plpgsql
     AS $$
+DECLARE
+  pont INTEGER := 0;
+  cJogador CURSOR FOR SELECT * FROM "cartolaFC".jogador_time_usuario WHERE "idTimeUsuario" = timeusuario;
+  fPontuacao INTEGER := 0;
 BEGIN
-    INSERT INTO "cartolaFC".status_jogador("idJogador", status) VALUES (NEW."idJogador", 0);
-    RETURN NEW;
+
+  FOR j IN cJogador LOOP
+    IF NOT EXISTS(SELECT 1
+    FROM "cartolaFC".jogador JOIN "cartolaFC".status_jogador ON "cartolaFC".jogador."idJogador" = "cartolaFC".status_jogador."idJogador"
+    WHERE "cartolaFC".jogador."idJogador" = j."idJogador") THEN
+
+      RAISE NOTICE '%', j."idJogador";
+
+      SELECT "cartolaFC".pontuacao_jogador.pontuacao INTO pont
+      FROM "cartolaFC".pontuacao_jogador NATURAL JOIN "cartolaFC".partida
+      WHERE "cartolaFC".pontuacao_jogador.idjogador = j."idJogador" AND "cartolaFC".partida.idrodada = rodada;
+
+      RAISE NOTICE '%', pont;
+
+      IF NOT pont ISNULL THEN
+        fPontuacao := fPontuacao + pont;
+      END IF;
+    END IF;
+  END LOOP;
+
+  RETURN fPontuacao;
 END;
 $$;
 
 
-ALTER FUNCTION "cartolaFC".status_jogador() OWNER TO postgres;
+ALTER FUNCTION "cartolaFC".pontuacao_time_usuario(timeusuario integer, rodada integer) OWNER TO postgres;
 
 --
 -- Name: time_usuario_valido(integer); Type: FUNCTION; Schema: cartolaFC; Owner: postgres
@@ -575,6 +380,37 @@ $$;
 ALTER FUNCTION "cartolaFC".verifica_jogo_rodada() OWNER TO postgres;
 
 --
+-- Name: verifica_partida_status_jogador(); Type: FUNCTION; Schema: cartolaFC; Owner: postgres
+--
+
+CREATE FUNCTION verifica_partida_status_jogador() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+  idTimeJogador INTEGER;
+  time1 INTEGER;
+  time2 INTEGER;
+BEGIN
+  SELECT "idTime" INTO idTimeJogador
+  FROM "cartolaFC".jogador jogador
+  WHERE jogador."idJogador" = NEW."idJogador";
+
+  SELECT partida.idtime1, partida.idtime2 INTO time1, time2
+  FROM "cartolaFC".partida partida
+  WHERE partida.idpartida = NEW.idpartida;
+
+  IF idTimeJogador <> time1 AND idTimeJogador <> time2 THEN
+    RAISE EXCEPTION 'Não pode haver status de um jogador para uma partida na qual seu time não esteja envolvido';
+  END IF;
+
+  RETURN NEW;
+END;
+$$;
+
+
+ALTER FUNCTION "cartolaFC".verifica_partida_status_jogador() OWNER TO postgres;
+
+--
 -- Name: verifica_qtd_gols_jogador(); Type: FUNCTION; Schema: cartolaFC; Owner: postgres
 --
 
@@ -717,45 +553,6 @@ ALTER TABLE campeonato_idcampeonato_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE campeonato_idcampeonato_seq OWNED BY campeonato.idcampeonato;
-
-
---
--- Name: classificacao; Type: TABLE; Schema: cartolaFC; Owner: postgres
---
-
-CREATE TABLE classificacao (
-    "idClassificacao" integer NOT NULL,
-    pontos integer NOT NULL,
-    "nJogos" integer NOT NULL,
-    vitorias integer NOT NULL,
-    empates integer NOT NULL,
-    derrotas integer NOT NULL,
-    "idTime" integer,
-    idcamp integer
-);
-
-
-ALTER TABLE classificacao OWNER TO postgres;
-
---
--- Name: classificacao_idClassificacao_seq; Type: SEQUENCE; Schema: cartolaFC; Owner: postgres
---
-
-CREATE SEQUENCE "classificacao_idClassificacao_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE "classificacao_idClassificacao_seq" OWNER TO postgres;
-
---
--- Name: classificacao_idClassificacao_seq; Type: SEQUENCE OWNED BY; Schema: cartolaFC; Owner: postgres
---
-
-ALTER SEQUENCE "classificacao_idClassificacao_seq" OWNED BY classificacao."idClassificacao";
 
 
 --
@@ -948,7 +745,7 @@ ALTER SEQUENCE partida_idpartida_seq OWNED BY partida.idpartida;
 CREATE TABLE pontuacao_jogador (
     idpontuacaojogador integer NOT NULL,
     pontuacao integer NOT NULL,
-    idrodada integer NOT NULL,
+    idpartida integer NOT NULL,
     idjogador integer NOT NULL
 );
 
@@ -1052,7 +849,8 @@ ALTER SEQUENCE rodada_idrodada_seq OWNED BY rodada.idrodada;
 CREATE TABLE status_jogador (
     "idStatusJogador" integer NOT NULL,
     "idJogador" integer,
-    status integer DEFAULT 0 NOT NULL
+    status integer DEFAULT 0 NOT NULL,
+    idpartida integer
 );
 
 
@@ -1189,13 +987,6 @@ ALTER TABLE ONLY campeonato ALTER COLUMN idcampeonato SET DEFAULT nextval('campe
 
 
 --
--- Name: classificacao idClassificacao; Type: DEFAULT; Schema: cartolaFC; Owner: postgres
---
-
-ALTER TABLE ONLY classificacao ALTER COLUMN "idClassificacao" SET DEFAULT nextval('"classificacao_idClassificacao_seq"'::regclass);
-
-
---
 -- Name: estatisticas_jogador idestatisticajogador; Type: DEFAULT; Schema: cartolaFC; Owner: postgres
 --
 
@@ -1297,27 +1088,13 @@ SELECT pg_catalog.setval('campeonato_idcampeonato_seq', 2, true);
 
 
 --
--- Data for Name: classificacao; Type: TABLE DATA; Schema: cartolaFC; Owner: postgres
---
-
-COPY classificacao ("idClassificacao", pontos, "nJogos", vitorias, empates, derrotas, "idTime", idcamp) FROM stdin;
-\.
-
-
---
--- Name: classificacao_idClassificacao_seq; Type: SEQUENCE SET; Schema: cartolaFC; Owner: postgres
---
-
-SELECT pg_catalog.setval('"classificacao_idClassificacao_seq"', 22, true);
-
-
---
 -- Data for Name: estatisticas_jogador; Type: TABLE DATA; Schema: cartolaFC; Owner: postgres
 --
 
 COPY estatisticas_jogador (idestatisticajogador, idpartida, idjogador, chutesgol, defesas, numerogols, roubadasbola, cartaovermelho, cartaoamarelo, faltascometidas, defesapenalti) FROM stdin;
 13	3	3	0	0	1	0	0	0	0	0
-11	3	2	0	0	1	0	0	0	0	0
+11	3	2	0	0	2	2	0	0	0	0
+15	3	4	8	0	0	0	0	0	0	0
 \.
 
 
@@ -1325,7 +1102,7 @@ COPY estatisticas_jogador (idestatisticajogador, idpartida, idjogador, chutesgol
 -- Name: estatisticas_jogador_idestatisticajogador_seq; Type: SEQUENCE SET; Schema: cartolaFC; Owner: postgres
 --
 
-SELECT pg_catalog.setval('estatisticas_jogador_idestatisticajogador_seq', 13, true);
+SELECT pg_catalog.setval('estatisticas_jogador_idestatisticajogador_seq', 15, true);
 
 
 --
@@ -1440,9 +1217,10 @@ SELECT pg_catalog.setval('partida_idpartida_seq', 25, true);
 -- Data for Name: pontuacao_jogador; Type: TABLE DATA; Schema: cartolaFC; Owner: postgres
 --
 
-COPY pontuacao_jogador (idpontuacaojogador, pontuacao, idrodada, idjogador) FROM stdin;
+COPY pontuacao_jogador (idpontuacaojogador, pontuacao, idpartida, idjogador) FROM stdin;
 12	6	3	3
-10	6	3	2
+10	14	3	2
+14	8	3	4
 \.
 
 
@@ -1450,7 +1228,7 @@ COPY pontuacao_jogador (idpontuacaojogador, pontuacao, idrodada, idjogador) FROM
 -- Name: pontuacao_jogador_idpontuacaojogador_seq; Type: SEQUENCE SET; Schema: cartolaFC; Owner: postgres
 --
 
-SELECT pg_catalog.setval('pontuacao_jogador_idpontuacaojogador_seq', 12, true);
+SELECT pg_catalog.setval('pontuacao_jogador_idpontuacaojogador_seq', 14, true);
 
 
 --
@@ -1458,6 +1236,7 @@ SELECT pg_catalog.setval('pontuacao_jogador_idpontuacaojogador_seq', 12, true);
 --
 
 COPY preco_jogador (idprecojogador, idjogador, idpartida, preco) FROM stdin;
+2	4	3	16
 \.
 
 
@@ -1465,7 +1244,7 @@ COPY preco_jogador (idprecojogador, idjogador, idpartida, preco) FROM stdin;
 -- Name: preco_jogador_idprecojogador_seq; Type: SEQUENCE SET; Schema: cartolaFC; Owner: postgres
 --
 
-SELECT pg_catalog.setval('preco_jogador_idprecojogador_seq', 1, false);
+SELECT pg_catalog.setval('preco_jogador_idprecojogador_seq', 2, true);
 
 
 --
@@ -1493,11 +1272,11 @@ SELECT pg_catalog.setval('rodada_idrodada_seq', 6, true);
 -- Data for Name: status_jogador; Type: TABLE DATA; Schema: cartolaFC; Owner: postgres
 --
 
-COPY status_jogador ("idStatusJogador", "idJogador", status) FROM stdin;
-2	48	0
-3	49	0
-4	50	0
-5	51	0
+COPY status_jogador ("idStatusJogador", "idJogador", status, idpartida) FROM stdin;
+5	51	0	3
+4	50	0	3
+2	48	0	3
+3	49	5	3
 \.
 
 
@@ -1549,6 +1328,7 @@ SELECT pg_catalog.setval('"time_idTime_seq"', 23, true);
 
 COPY time_usuario ("idTimeUsuario", "idFormacao", "idUsuario") FROM stdin;
 1	1	1
+2	1	3
 \.
 
 
@@ -1556,7 +1336,7 @@ COPY time_usuario ("idTimeUsuario", "idFormacao", "idUsuario") FROM stdin;
 -- Name: time_usuario_idTimeUsuario_seq; Type: SEQUENCE SET; Schema: cartolaFC; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"time_usuario_idTimeUsuario_seq"', 1, true);
+SELECT pg_catalog.setval('"time_usuario_idTimeUsuario_seq"', 2, true);
 
 
 --
@@ -1582,14 +1362,6 @@ SELECT pg_catalog.setval('"usuario_idUsuario_seq"', 3, true);
 
 ALTER TABLE ONLY campeonato
     ADD CONSTRAINT campeonato_pkey PRIMARY KEY (idcampeonato);
-
-
---
--- Name: classificacao classificacao_pkey; Type: CONSTRAINT; Schema: cartolaFC; Owner: postgres
---
-
-ALTER TABLE ONLY classificacao
-    ADD CONSTRAINT classificacao_pkey PRIMARY KEY ("idClassificacao");
 
 
 --
@@ -1705,13 +1477,6 @@ ALTER TABLE ONLY usuario
 
 
 --
--- Name: classificacao_idtime_uindex; Type: INDEX; Schema: cartolaFC; Owner: postgres
---
-
-CREATE UNIQUE INDEX classificacao_idtime_uindex ON classificacao USING btree ("idTime");
-
-
---
 -- Name: estatisticas_jogador_idjogador_idrodada_uindex; Type: INDEX; Schema: cartolaFC; Owner: postgres
 --
 
@@ -1768,24 +1533,10 @@ CREATE UNIQUE INDEX rodada_data_idcampeonato_uindex ON rodada USING btree (data,
 
 
 --
--- Name: partida atualiza_classificacao; Type: TRIGGER; Schema: cartolaFC; Owner: postgres
+-- Name: pontuacao_jogador trigger_atualiza_preco_jogador; Type: TRIGGER; Schema: cartolaFC; Owner: postgres
 --
 
-CREATE TRIGGER atualiza_classificacao AFTER INSERT OR UPDATE ON partida FOR EACH ROW EXECUTE PROCEDURE atualiza_classificacao();
-
-
---
--- Name: partida atualiza_classificacao2; Type: TRIGGER; Schema: cartolaFC; Owner: postgres
---
-
-CREATE TRIGGER atualiza_classificacao2 AFTER INSERT OR UPDATE ON partida FOR EACH ROW EXECUTE PROCEDURE atualiza_classificacao2();
-
-
---
--- Name: time insere_classificacao; Type: TRIGGER; Schema: cartolaFC; Owner: postgres
---
-
-CREATE TRIGGER insere_classificacao AFTER INSERT ON "time" FOR EACH ROW EXECUTE PROCEDURE insert_classificacao();
+CREATE TRIGGER trigger_atualiza_preco_jogador AFTER INSERT OR UPDATE ON pontuacao_jogador FOR EACH ROW EXECUTE PROCEDURE atualiza_preco_jogador();
 
 
 --
@@ -1803,17 +1554,17 @@ CREATE TRIGGER trigger_qtd_gols_jogador AFTER INSERT OR UPDATE ON estatisticas_j
 
 
 --
--- Name: jogador trigger_status_jogador_jogador; Type: TRIGGER; Schema: cartolaFC; Owner: postgres
---
-
-CREATE TRIGGER trigger_status_jogador_jogador AFTER INSERT ON jogador FOR EACH ROW EXECUTE PROCEDURE status_jogador();
-
-
---
 -- Name: estatisticas_jogador trigger_verifica_cartoes; Type: TRIGGER; Schema: cartolaFC; Owner: postgres
 --
 
 CREATE TRIGGER trigger_verifica_cartoes BEFORE INSERT OR UPDATE ON estatisticas_jogador FOR EACH ROW EXECUTE PROCEDURE verifica_cartoes();
+
+
+--
+-- Name: status_jogador trigger_verifica_partida_status_jogador; Type: TRIGGER; Schema: cartolaFC; Owner: postgres
+--
+
+CREATE TRIGGER trigger_verifica_partida_status_jogador BEFORE INSERT OR UPDATE ON status_jogador FOR EACH ROW EXECUTE PROCEDURE verifica_partida_status_jogador();
 
 
 --
@@ -1845,14 +1596,6 @@ CREATE TRIGGER verifica_qtd_partidas BEFORE INSERT ON partida FOR EACH ROW EXECU
 
 
 --
--- Name: classificacao classificacao_campeonato_idcampeonato_fk; Type: FK CONSTRAINT; Schema: cartolaFC; Owner: postgres
---
-
-ALTER TABLE ONLY classificacao
-    ADD CONSTRAINT classificacao_campeonato_idcampeonato_fk FOREIGN KEY (idcamp) REFERENCES campeonato(idcampeonato);
-
-
---
 -- Name: estatisticas_jogador estatisticas_jogador_jogador_idjogador_fk; Type: FK CONSTRAINT; Schema: cartolaFC; Owner: postgres
 --
 
@@ -1866,14 +1609,6 @@ ALTER TABLE ONLY estatisticas_jogador
 
 ALTER TABLE ONLY estatisticas_jogador
     ADD CONSTRAINT estatisticas_jogador_partida_idpartida_fk FOREIGN KEY (idpartida) REFERENCES partida(idpartida) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: classificacao fk_classificacao_time; Type: FK CONSTRAINT; Schema: cartolaFC; Owner: postgres
---
-
-ALTER TABLE ONLY classificacao
-    ADD CONSTRAINT fk_classificacao_time FOREIGN KEY ("idTime") REFERENCES "time"("idTime");
 
 
 --
@@ -1957,14 +1692,6 @@ ALTER TABLE ONLY pontuacao_jogador
 
 
 --
--- Name: pontuacao_jogador pontuacao_jogador_rodada_idrodada_fk; Type: FK CONSTRAINT; Schema: cartolaFC; Owner: postgres
---
-
-ALTER TABLE ONLY pontuacao_jogador
-    ADD CONSTRAINT pontuacao_jogador_rodada_idrodada_fk FOREIGN KEY (idrodada) REFERENCES rodada(idrodada);
-
-
---
 -- Name: preco_jogador preco_jogador_jogador_idjogador_fk; Type: FK CONSTRAINT; Schema: cartolaFC; Owner: postgres
 --
 
@@ -1986,6 +1713,14 @@ ALTER TABLE ONLY preco_jogador
 
 ALTER TABLE ONLY rodada
     ADD CONSTRAINT rodada_campeonato_idcampeonato_fk FOREIGN KEY (idcampeonato) REFERENCES campeonato(idcampeonato);
+
+
+--
+-- Name: status_jogador status_jogador_partida_idpartida_fk; Type: FK CONSTRAINT; Schema: cartolaFC; Owner: postgres
+--
+
+ALTER TABLE ONLY status_jogador
+    ADD CONSTRAINT status_jogador_partida_idpartida_fk FOREIGN KEY (idpartida) REFERENCES partida(idpartida);
 
 
 --
