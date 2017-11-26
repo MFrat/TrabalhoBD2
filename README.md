@@ -18,6 +18,7 @@
 4. [Outras consultas](#outras-consultas)
     1. [Classificação de um campeonato](#classificação-do-campeonato)
     2. [Pontuação do time de um usuário](#pontuação-do-time-de-um-usuário)
+    3. [Classificação dos usuários](#classificação-dos-usuários)
 
 ## Visão Geral
 Modelagem, simplificada, das relações das entidades e regras de negócios do CartolaFC do Globoesporte.com.
@@ -498,6 +499,28 @@ BEGIN
   END LOOP;
 
   RETURN fPontuacao;
+END;
+$$;
+```
+
+### Classificação dos usuários
+``` plpgsql
+CREATE OR REPLACE FUNCTION "cartolaFC".classificacaoUsuario(camp INTEGER) RETURNS TABLE(
+idUsuario INTEGER, pontuacao INTEGER
+) LANGUAGE plpgsql
+AS
+$$
+DECLARE
+  cUsuario CURSOR FOR SELECT * FROM "cartolaFC".usuario;
+  cPartida CURSOR FOR SELECT * FROM "cartolaFC".partida NATURAL JOIN "cartolaFC".rodada WHERE "cartolaFC".rodada.idcampeonato = camp;
+  uPont INTEGER := 0;
+BEGIN
+  for i IN cUsuario LOOP
+    for j IN cPartida LOOP
+      uPont := uPont + "cartolaFC".pontuacao_time_usuario(i."idUsuario", j.idpartida);
+    END LOOP;
+    RETURN QUERY SELECT i."idUsuario", uPont;
+  END LOOP;
 END;
 $$;
 ```
