@@ -31,7 +31,7 @@ Modelagem, simplificada, das relações das entidades e regras de negócios do C
 
 ### Modelo lógico
 <p align="center">
-  <img src="https://i.imgur.com/nhUf7tP.png" width="900"/>
+  <img src="https://i.imgur.com/zh2nTHR.png" width="900"/>
 </p>
 
 ## Regras de negócio
