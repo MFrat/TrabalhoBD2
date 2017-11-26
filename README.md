@@ -14,6 +14,7 @@
     7. [Da Tabela Pontuação do Jogador](#da-tabela-pontuação-do-jogador)
     8. [Da Tabela Estatísticas do Jogador](#da-tabela-estatísticas-do-jogador)
     9. [Da Tabela Status do Jogador](#da-tabela-status-do-jogador)
+    10. [Da tabela Preco do Jogador](#da-tabela-preco-do-jogador)
 4. [Outras consultas](#outras-consultas)
     1. [Classificação de um campeonato](#classificação-do-campeonato)
     2. [Pontuação do time de um usuário](#pontuação-do-time-de-um-usuário)
@@ -97,8 +98,10 @@ unique_index_rodada UNIQUE INDEX rodada (data ASC, idcampeonato ASC)
 ```
 
 ### Da Tabela JogadorTimeUsuario
-- O número de jogadores em cada posição não pode exceder ao número imposto pela formação do time escolhida pelo usuário.
+- Um time de um usuário não pode conter o mesmo jogador duas vezes
+`create unique index jogador_time_usuario_idjogador_idtimeusuario_uindex on jogador_time_usuario ("idJogador", "idTimeUsuario");`
 
+- O número de jogadores em cada posição não pode exceder ao número imposto pela formação do time escolhida pelo usuário.
 ``` plpgsql
 CREATE TRIGGER trigger_verificia_time_usuario_formacao
 BEFORE INSERT
@@ -204,6 +207,9 @@ $$;
 ```
 
 ### Da Tabela Estatísticas do jogador
+- Um jogador só pode ter uma estatística por partida
+`unique index estatisticas_jogador_idjogador_idrodada_uindex on estatisticas_jogador (idjogador, idpartida);`
+
 - A cada inserção de tupla na tabela de Estatísticas do Jogador a respectiva pontuação deve ser calculada.
 ``` plpgsql
 CREATE TRIGGER trigger_pontuacao_jogador
@@ -390,6 +396,10 @@ BEGIN
 END;
 $$;
 ```
+
+### Da Tabela Preco do Jogador
+- Um jogador só pode ter um preco por partida.
+`CREATE UNIQUE INDEX preco_jogador_idjogador_idpartida_uindex ON preco_jogador (idjogador, idpartida);`
 
 ## Outras consultas
 
