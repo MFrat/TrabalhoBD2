@@ -98,7 +98,9 @@ unique_index_rodada UNIQUE INDEX rodada (data ASC, idcampeonato ASC)
 
 ### Da Tabela JogadorTimeUsuario
 - Um time de um usuário não pode conter o mesmo jogador duas vezes
-`create unique index jogador_time_usuario_idjogador_idtimeusuario_uindex on jogador_time_usuario ("idJogador", "idTimeUsuario");`
+``` plpgsql
+create unique index jogador_time_usuario_idjogador_idtimeusuario_uindex on jogador_time_usuario ("idJogador", "idTimeUsuario");
+```
 
 - O número de jogadores em cada posição não pode exceder ao número imposto pela formação do time escolhida pelo usuário.
 ``` plpgsql
@@ -207,7 +209,9 @@ $$;
 
 ### Da Tabela Estatísticas do jogador
 - Um jogador só pode ter uma estatística por partida
-`unique index estatisticas_jogador_idjogador_idrodada_uindex on estatisticas_jogador (idjogador, idpartida);`
+``` plpgsql
+unique index estatisticas_jogador_idjogador_idrodada_uindex on estatisticas_jogador (idjogador, idpartida);
+```
 
 - A cada inserção de tupla na tabela de Estatísticas do Jogador a respectiva pontuação deve ser calculada.
 ``` plpgsql
